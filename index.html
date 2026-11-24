@@ -78,6 +78,14 @@ p + p{margin-top:12px}
 .plano .val small{display:block;font:400 16px var(--sans);color:var(--tinta-2)}
 .plano p{color:var(--tinta-2);font-size:16px;grid-column:1/-1;max-width:70ch}
 .plano.rec{background:linear-gradient(90deg,rgba(122,36,24,.07),transparent 70%)}
+.vem{list-style:none;grid-column:1/-1;columns:2 300px;column-gap:40px;margin-top:6px}
+.vem li{padding:7px 0 7px 22px;position:relative;font-size:16px;break-inside:avoid}
+.vem li::before{content:'';position:absolute;left:0;top:17px;width:12px;height:2px;background:var(--carne)}
+.vem li.tudo{font-family:var(--serif);font-style:italic;padding-left:0;column-span:all}
+.vem li.tudo::before{display:none}
+.inclui{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:30px}
+.inclui b{display:block;font-family:var(--serif);font-weight:700;font-size:18px;margin-bottom:4px}
+.inclui span{color:var(--tinta-2);font-size:16px}
 .rodape-conta{margin-top:22px;font-size:15px;color:var(--tinta-2);max-width:70ch}
 
 /* café */
@@ -100,6 +108,7 @@ p + p{margin-top:12px}
   .cel{margin:0 auto}
   .tela{height:300px}.tela iframe{transform:scale(.33)}
   .plano{grid-template-columns:1fr}.plano .val{text-align:left}
+  .inclui{grid-template-columns:1fr;gap:18px}
 }
 @media print{
   @page{size:A4;margin:0}
@@ -113,6 +122,12 @@ p + p{margin-top:12px}
   .site .vivo{grid-template-columns:1fr 1fr}
   .tela{height:470px}.tela iframe{transform:scale(.48)}
   .abrir{display:none}
+  .folha.conta-folha{height:auto;min-height:0;overflow:visible}
+  .plano{break-inside:avoid;padding:16px 0}
+  .plano:last-child{break-before:page;margin-top:22mm}
+  .vem li{font-size:13px;padding:4px 0 4px 20px}.vem li::before{top:12px}
+  .plano h4,.plano .val{font-size:24px}
+  .inclui{break-inside:avoid}
   .folha{height:297mm;overflow:hidden}
   h3{font-size:40px;margin-bottom:14px}
   .achado{padding:12px 0;gap:24px;grid-template-columns:1fr 2.2fr}
@@ -225,27 +240,59 @@ p + p{margin-top:12px}
 </section>
 
 <!-- 6. A conta -->
-<section class="folha">
+<section class="folha conta-folha">
   <h2>A conta</h2>
   <h3>Três formas de servir</h3>
   <div class="conta">
     <div class="plano">
       <h4>Biolink</h4>
-      <div class="val">R$ 390<small>e R$ 79 por mês</small></div>
-      <p>O link da bio com a marca da Carbone, os cardápios em ordem, o estado da brasa e um painel com os toques em cada botão.</p>
+      <div class="val">R$ 590<small>e R$ 99 por mês</small></div>
+      <p>Para trocar o Linktree por uma página da Carbone, no endereço da Carbone.</p>
+      <ul class="vem">
+        <li>Página de links em carbonesteakhouse.com.br, com as fontes, as cores e as fotos da casa</li>
+        <li>Reativação do domínio, que hoje aponta para uma página de erro</li>
+        <li>Estado da brasa pelo horário real: “Acesa até 23h”, “Acende às 17h30”</li>
+        <li>A oferta da semana no topo, como a Noite de Fogo, trocada quando a casa pedir</li>
+        <li>Cada cardápio com endereço próprio: principal, bebidas, sobremesas, kids e inglês</li>
+        <li>Botões de reserva (GetIn), iFood, eventos, rota e avaliação</li>
+        <li>Painel com os toques em cada botão, todo mês</li>
+      </ul>
     </div>
     <div class="plano rec">
       <h4>Site da casa<span class="sug">sugestão da casa</span></h4>
-      <div class="val">R$ 990<small>e R$ 149 por mês</small></div>
-      <p>Tudo do biolink, mais o site no domínio que já é da Carbone: primeira tela pelo horário, cortes, cardápio com alergênicos e inglês, eventos e relatório mensal. A casa edita preços e pratos sozinha.</p>
+      <div class="val">R$ 1.490<small>e R$ 189 por mês</small></div>
+      <p>Para a Carbone ser achada no Google com a informação certa e o cardápio que ela mesma edita.</p>
+      <ul class="vem">
+        <li class="tudo">Tudo do Biolink, mais:</li>
+        <li>Site completo em carbonesteakhouse.com.br, em português e inglês</li>
+        <li>Primeira tela que muda com o horário: almoço, entre serviços, noite e casa fechada</li>
+        <li>Cortes com peso e preço, de 250 g a 950 g</li>
+        <li>Os 62 pratos com filtro de alergênicos; a casa troca preço e prato sozinha</li>
+        <li>Revisão da carta com a cozinha: as 15 correções e os alergênicos que faltam</li>
+        <li>Página de eventos que entrega o pedido pronto no WhatsApp da equipe</li>
+        <li>Horário, CEP e cardápio iguais no Google, no Instagram e no Tripadvisor</li>
+        <li>QR code para as mesas, apontando para o cardápio novo</li>
+        <li>Relatório do mês: visitas, toques, idioma e de onde veio cada pessoa</li>
+      </ul>
     </div>
     <div class="plano">
       <h4>Canal direto</h4>
-      <div class="val">R$ 1.990<small>e R$ 249 por mês</small></div>
-      <p>Tudo do site, mais pedido direto com carrinho enviado ao WhatsApp da casa e lista de clientes que fica com a Carbone. Faz sentido se a casa quiser depender menos do iFood.</p>
+      <div class="val">R$ 2.890<small>e R$ 329 por mês</small></div>
+      <p>Para quem quer vender parte do delivery sem pagar comissão a cada pedido.</p>
+      <ul class="vem">
+        <li class="tudo">Tudo do Site da casa, mais:</li>
+        <li>Pedido direto pelo site, com carrinho, que chega pronto no WhatsApp da casa</li>
+        <li>Lista de clientes que fica com a Carbone, com consentimento de cada um</li>
+        <li>Cupom de volta para quem pediu direto</li>
+        <li>Relatório com pedidos, ticket médio e o que mais sai</li>
+      </ul>
     </div>
   </div>
-  <p class="rodape-conta">A mensalidade inclui hospedagem, domínio, suporte e pequenas atualizações. Mídia paga e taxas de meios de pagamento ficam de fora. A nota é emitida pelo MEI de Guilherme Castro; a Timeless assina o trabalho.</p>
+  <div class="inclui">
+    <div><b>Toda mensalidade inclui</b><span>Hospedagem, domínio, certificado de segurança, suporte pelo WhatsApp e até 4 ajustes de conteúdo por mês, como trocar um preço ou a oferta da semana.</span></div>
+    <div><b>Fica de fora</b><span>Mídia paga, sessão de fotos, taxas de meios de pagamento e mudanças de layout. Esses itens são orçados à parte.</span></div>
+  </div>
+  <p class="rodape-conta">A nota é emitida pelo MEI de Guilherme Castro; a Timeless assina o trabalho.</p>
 </section>
 
 <!-- 7. O café: próximo passo -->

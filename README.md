@@ -5,7 +5,7 @@ Protótipo publicado com o ok do Guilherme em 23/11/2026, só para a Carbone ver
 | Arquivo | O que é |
 |---|---|
 | `index.html` | A proposta, em forma de cardápio: entrada, prato principal, acompanhamentos, a conta, o café |
-| `Timeless - Proposta Carbone Steakhouse.pdf` | A mesma proposta em PDF A4, 7 páginas |
+| `Timeless - Proposta Carbone Steakhouse.pdf` | A mesma proposta em PDF A4, 8 páginas |
 | `prototipo/` | Site da casa: a primeira tela muda com o horário, cortes por peso, os 62 pratos reais com filtro de alergênicos e inglês, eventos |
 | `prototipo/cardapio.js` | Cardápio e carta de bebidas copiados do GetIn em 23/11/2026, com as correções marcadas |
 | `biolink/` | Link da bio no lugar do Linktree |
@@ -31,7 +31,7 @@ Na barra de baixo do site:
 - Conferir de novo os 3 achados no dia (site fora do ar, horários, respostas no Tripadvisor).
 - As fotos e a logo vêm do site do Grupo Social Clube por link direto. Para publicar, só fotos que a casa aprovar.
 - As traduções para inglês são nossas e precisam da revisão da casa.
-- Os preços da Timeless são a tabela de 23/11/2026.
+- Preços da Carbone (23/11/2026): Biolink R$ 590 + R$ 99/mês; Site da casa R$ 1.490 + R$ 189/mês; Canal direto R$ 2.890 + R$ 329/mês.
 
 ## Fontes e cores
 
