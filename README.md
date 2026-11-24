@@ -5,10 +5,14 @@ Protótipo publicado com o ok do Guilherme em 23/11/2026, só para a Carbone ver
 | Arquivo | O que é |
 |---|---|
 | `index.html` | A proposta, em forma de cardápio: entrada, prato principal, acompanhamentos, a conta, o café |
-| `Timeless - Proposta Carbone Steakhouse.pdf` | A mesma proposta em PDF A4, 8 páginas |
-| `prototipo/` | Site da casa: a primeira tela muda com o horário, cortes por peso, os 62 pratos reais com filtro de alergênicos e inglês, eventos |
-| `prototipo/cardapio.js` | Cardápio e carta de bebidas copiados do GetIn em 23/11/2026, com as correções marcadas |
-| `biolink/` | Link da bio no lugar do Linktree |
+| `Timeless - Proposta Carbone Steakhouse.pdf` | A mesma proposta em PDF A4 |
+| `site/` | Site da casa (no ar: carbonesteakhouse.com.br): primeira tela pelo horário, cortes por peso, 62 pratos com alergênicos e inglês, eventos |
+| `site/reservar/` | Reserva em passos com triagem (no ar: /reservar). Comum confirma na hora; grupo a partir de 6 ou pedido especial vai para a equipe |
+| `site/links/` | Link da bio (no ar: /links) |
+| `site/comum.js` | Horários, fuso e idioma, compartilhados entre as páginas |
+| `site/cardapio.js` | Cardápio e carta de bebidas copiados do GetIn em 23/11/2026, com as correções marcadas |
+| `painel/` | Área da equipe (no ar: painel.carbonesteakhouse.com.br, com login): reservas para confirmar, ficha e código |
+| `prototipo/`, `biolink/` | Só redirecionam os endereços antigos, que já foram compartilhados |
 | `VARREDURA.md` | Tudo o que foi conferido na Carbone e no Grupo Social Clube, com fontes, e a análise do grupo como porta de entrada |
 
 ## Ver no computador
