@@ -1,6 +1,6 @@
 # Carbone Steakhouse · entrega da Timeless
 
-Protótipo privado. Não publicar sem o ok do Guilherme. Todas as páginas têm `noindex` e o `robots.txt` bloqueia buscadores.
+Protótipo publicado com o ok do Guilherme em 23/11/2026, só para a Carbone ver. Não é o site oficial da casa. Todas as páginas têm `noindex` e o `robots.txt` bloqueia buscadores.
 
 | Arquivo | O que é |
 |---|---|
