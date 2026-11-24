@@ -54,33 +54,60 @@ img{display:block;max-width:100%}
 .reservar small{font-size:14px;opacity:.8;font-weight:400}
 
 
-/* reserva própria */
+/* reserva em passos: uma pergunta por vez */
 .res{padding:96px 0;background:var(--cinza-2)}
-.res .grade{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px}
+.res .grade{display:grid;grid-template-columns:.75fr 1.25fr;gap:64px;align-items:start}
 .res h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4vw,54px);line-height:1.1}
 .res .l{color:var(--tinta-2);margin-top:12px;max-width:40ch}
-#form-res{display:block}
-.passo{margin-bottom:26px}
-.passo h3{font-family:var(--serif);font-style:italic;font-weight:400;font-size:20px;margin-bottom:10px}
+.trilha{list-style:none;margin-top:30px;font-size:15px;counter-reset:t}
+.trilha li{counter-increment:t;display:flex;gap:12px;align-items:baseline;padding:7px 0;color:#6f6a62;border-top:1px solid #bdb8af}
+.trilha li::before{content:counter(t);font-family:var(--serif);min-width:16px}
+.trilha li.feito{color:var(--tinta)}
+.trilha li.feito span{color:var(--tinta-2)}
+.trilha li.agora{color:var(--carne);font-weight:500}
+.trilha li span{margin-left:auto;text-align:right}
+#form-res{display:block;min-height:420px}
+.etapa{display:none}
+.etapa.on{display:block;animation:entra .35s ease}
+@keyframes entra{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.etapa.on{animation:none}}
+.etapa h3{font-family:var(--serif);font-weight:400;font-size:clamp(26px,2.8vw,36px);line-height:1.2;margin-bottom:6px}
+.etapa .dica{color:var(--tinta-2);font-size:15px;margin-bottom:20px}
 .opcoes{display:flex;flex-wrap:wrap;gap:8px}
-.opcoes button{background:transparent;border:2px solid var(--tinta);color:var(--tinta);font:500 15px var(--sans);min-height:48px;min-width:64px;padding:4px 12px;cursor:pointer;line-height:1.2}
-.opcoes button small{display:block;font-weight:400;font-size:12px;color:var(--tinta-2)}
+.opcoes button{background:transparent;border:2px solid var(--tinta);color:var(--tinta);font:500 16px var(--sans);min-height:52px;min-width:72px;padding:6px 14px;cursor:pointer;line-height:1.2;text-align:left}
+.opcoes button small{display:block;font-weight:400;font-size:13px;color:var(--tinta-2)}
+.opcoes button:hover{background:var(--cinza)}
 .opcoes button[aria-pressed=true]{background:var(--carne);border-color:var(--carne);color:#F3EDE6}
 .opcoes button[aria-pressed=true] small{color:#e9cfc6}
-.opcoes button:disabled{opacity:.35;cursor:not-allowed;text-decoration:line-through}
-.turno{font-size:14px;color:var(--tinta-2);margin:10px 0 6px;width:100%}
+.opcoes button:disabled{opacity:.35;cursor:not-allowed}
+.opcoes.largas button{min-width:180px}
+.turno{font-size:14px;color:var(--tinta-2);margin:14px 0 6px;width:100%}
+.marcas{display:grid;gap:4px}
+.marcas label{display:flex;gap:12px;align-items:center;min-height:48px;cursor:pointer}
+.marcas input[type=checkbox]{accent-color:var(--carne);width:20px;height:20px}
 .dados{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .dados label{display:grid;gap:4px;font-size:15px;color:var(--tinta-2)}
 .dados .full{grid-column:1/-1}
-.confirmar{width:100%;background:var(--carne);color:#F3EDE6;border:0;font:500 18px var(--sans);min-height:60px;cursor:pointer;margin-top:18px}
-.confirmar:disabled{background:#a49f97;cursor:not-allowed}
-.resumo{font-size:15px;color:var(--tinta-2);margin-top:10px;min-height:1.5em}
-.ok{display:none;border-top:2px solid var(--tinta);border-bottom:2px solid var(--tinta);padding:28px 0}
-.ok.on{display:block}
-.ok b{display:block;font-family:var(--serif);font-weight:400;font-size:32px;line-height:1.2;margin-bottom:10px}
-.ok p{color:var(--tinta-2);max-width:52ch}
-.ok .nota{font-size:14px;margin-top:14px;color:var(--carne)}
-@media (max-width:900px){.res .grade{grid-template-columns:1fr;gap:28px}.dados{grid-template-columns:1fr}.res{padding:64px 0}}
+.navega{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:28px}
+.voltar{background:none;border:0;font:500 16px var(--sans);color:var(--tinta);min-height:48px;padding:0 4px;cursor:pointer;text-decoration:underline;text-underline-offset:5px}
+.seguir{background:var(--carne);color:#F3EDE6;border:0;font:500 17px var(--sans);min-height:56px;padding:0 28px;cursor:pointer;margin-left:auto}
+.seguir:disabled{background:#a49f97;cursor:not-allowed}
+.revisao-res{border-top:2px solid var(--tinta);border-bottom:2px solid var(--tinta)}
+.revisao-res div{display:flex;justify-content:space-between;gap:20px;padding:12px 0;border-top:1px solid #bdb8af}
+.revisao-res div:first-child{border-top:0}
+.revisao-res dt{color:var(--tinta-2)}
+.revisao-res dd{text-align:right;font-weight:500}
+.aviso-res{font-size:14px;color:var(--carne);margin-top:12px}
+.status-res{list-style:none;margin:6px 0 22px}
+.status-res li{display:flex;gap:12px;align-items:center;padding:10px 0;color:#8f897f;transition:color .3s}
+.status-res li i{width:12px;height:12px;border:2px solid currentColor;border-radius:50%;flex:none}
+.status-res li.ok{color:var(--tinta)}
+.status-res li.ok i{background:var(--carne);border-color:var(--carne)}
+.codigo{font-family:var(--serif);font-size:44px;color:var(--carne);letter-spacing:.04em;margin:4px 0 14px}
+.final .acoes{display:flex;gap:18px;flex-wrap:wrap;margin-top:18px}
+.final .acoes a,.final .acoes button{min-height:48px;display:inline-flex;align-items:center;font:500 16px var(--sans);color:var(--tinta);background:none;border:2px solid var(--tinta);padding:0 18px;cursor:pointer;text-decoration:none}
+.nota-res{font-size:14px;color:var(--tinta-2);margin-top:22px;max-width:56ch}
+@media (max-width:900px){.res .grade{grid-template-columns:1fr;gap:20px}.trilha{display:none}.dados{grid-template-columns:1fr}.res{padding:64px 0}.opcoes.largas button{min-width:calc(50% - 4px)}}
 
 /* cortes */
 .cortes{padding:110px 0 90px}
@@ -240,28 +267,36 @@ footer{padding:40px 28px 140px;max-width:1200px;margin:0 auto;color:var(--tinta-
     <div class="wrap grade">
       <div>
         <h2 data-t="resT">Reservar mesa</h2>
-        <p class="l" data-t="resL">Escolha o dia, quantas pessoas e o horário. A Carbone confirma pelo WhatsApp e lembra você no dia.</p>
+        <p class="l" data-t="resL">Uma pergunta de cada vez. No fim, a Carbone confere a mesa e a reserva sai confirmada, com código.</p>
+        <ol class="trilha" id="trilha" aria-label="Etapas da reserva"></ol>
       </div>
-      <form id="form-res" novalidate>
-        <div id="res-passos">
-          <div class="passo"><h3 data-t="rDia">Que dia?</h3><div class="opcoes" id="r-dias"></div></div>
-          <div class="passo"><h3 data-t="rPessoas">Quantas pessoas?</h3><div class="opcoes" id="r-pessoas"></div><p class="resumo" id="r-grupo"></p></div>
-          <div class="passo"><h3 data-t="rHora">Que horas?</h3><div class="opcoes" id="r-horas"></div></div>
-          <div class="passo"><h3 data-t="rVoce">Para quem?</h3>
-            <div class="dados">
-              <label><span data-t="fNome2">Nome</span><input id="r-nome" autocomplete="name"></label>
-              <label><span>WhatsApp</span><input id="r-zap" type="tel" inputmode="tel" autocomplete="tel" placeholder="(85) 9 0000-0000"></label>
-              <label class="full"><span data-t="rObs">É uma ocasião especial?</span><input id="r-obs" placeholder=""></label>
-            </div>
+      <form id="form-res" novalidate aria-live="polite">
+        <div class="etapa" data-e="dia"><h3 id="q-dia"></h3><p class="dica" id="d-dia"></p><div class="opcoes" id="r-dias"></div></div>
+        <div class="etapa" data-e="hora"><h3 id="q-hora"></h3><p class="dica" id="d-hora"></p><div class="opcoes" id="r-horas"></div></div>
+        <div class="etapa" data-e="pessoas"><h3 id="q-pessoas"></h3><p class="dica" id="d-pessoas"></p><div class="opcoes" id="r-pessoas"></div><p class="aviso-res" id="r-grupo"></p></div>
+        <div class="etapa" data-e="ocasiao"><h3 id="q-ocasiao"></h3><p class="dica" id="d-ocasiao"></p><div class="opcoes largas" id="r-ocasiao"></div></div>
+        <div class="etapa" data-e="precisa"><h3 id="q-precisa"></h3><p class="dica" id="d-precisa"></p>
+          <div class="marcas" id="r-precisa"></div>
+          <div class="dados" style="margin-top:12px"><label class="full"><span id="l-restr"></span><input id="r-restr"></label></div>
+        </div>
+        <div class="etapa" data-e="contato"><h3 id="q-contato"></h3><p class="dica" id="d-contato"></p>
+          <div class="dados">
+            <label><span id="l-nome"></span><input id="r-nome" autocomplete="name"></label>
+            <label><span>WhatsApp</span><input id="r-zap" type="tel" inputmode="tel" autocomplete="tel" placeholder="(85) 9 0000-0000"></label>
           </div>
-          <p class="resumo" id="r-resumo" aria-live="polite"></p>
-          <button class="confirmar" type="submit" id="r-ok" disabled data-t="rConf">Pedir a reserva</button>
         </div>
-        <div class="ok" id="r-feito" role="status">
-          <b id="r-feito-t"></b>
-          <p id="r-feito-s"></p>
-          <p class="nota" data-t="rNota">Protótipo: nenhuma reserva foi enviada. No site publicado, o pedido entra na agenda da casa, no GetIn ou no painel da Timeless, como a Carbone preferir.</p>
+        <div class="etapa" data-e="revisar"><h3 id="q-revisar"></h3><p class="dica" id="d-revisar"></p><dl class="revisao-res" id="r-revisao"></dl></div>
+        <div class="etapa final" data-e="final">
+          <h3 id="f-titulo"></h3>
+          <ul class="status-res" id="r-status"></ul>
+          <div id="r-pronto" hidden>
+            <div class="codigo" id="r-codigo"></div>
+            <p id="f-texto"></p>
+            <div class="acoes"><a id="r-ics" download="reserva-carbone.ics" href="#"></a><button type="button" id="r-nova"></button></div>
+          </div>
+          <p class="nota-res" id="f-nota"></p>
         </div>
+        <div class="navega" id="r-nav"><button type="button" class="voltar" id="r-voltar"></button><button type="button" class="seguir" id="r-seguir" disabled></button></div>
       </form>
     </div>
   </section>
@@ -443,54 +478,125 @@ sh.addEventListener('input',()=>{ if(sim){sim.m=+sh.value; pintaAgora();}});
 setInterval(()=>{if(!sim)pintaAgora()},30000);
 
 
-/* ---------- reserva própria ---------- */
-const R={dia:null,pessoas:2,hora:null};
+/* ---------- reserva em passos, com triagem ---------- */
+// Cada resposta filtra a próxima pergunta: o dia define os horários, o tamanho do grupo
+// pode desviar para eventos, a ocasião e as necessidades vão para a equipe antes de confirmar.
+const ETAPAS=['dia','hora','pessoas','ocasiao','precisa','contato','revisar','final'];
+const R={e:0,dia:null,hora:null,pessoas:null,ocasiao:null,precisa:[],restr:'',nome:'',zap:'',codigo:null};
+const OCASIOES=[['casal','Jantar a dois','Dinner for two'],['familia','Família','Family'],['amigos','Amigos','Friends'],['negocios','Negócios','Business'],['aniversario','Aniversário','Birthday'],['outra','Outra','Other']];
+const PRECISA=[['crianca','Cadeira para criança','High chair for a child'],['acesso','Acesso sem degraus','Step-free access'],['tranquila','Mesa mais tranquila','A quieter table']];
+const fmtDia=x=>`${lang==='en'?DAYS[x.wd]:DIAS[x.wd]}, ${x.dt.getDate()}/${x.dt.getMonth()+1}`;
 function diasRes(){
   const {d}=agoraFortaleza(); const hoje=new Date(new Date().toLocaleString('en-US',{timeZone:'America/Fortaleza'}));
   return [...Array(7)].map((_,k)=>{const dt=new Date(hoje);dt.setDate(hoje.getDate()+k);return {k,wd:(d+k)%7,dt};});
 }
 function horasDoDia(wd,k){
   const {m}=agoraFortaleza(); const out=[];
-  HOR[wd].forEach(([a,b])=>{for(let t=a;t<=b-60;t+=30){ if(k===0 && t<m+30) continue; out.push(t);} });
+  HOR[wd].forEach(([a,b])=>{for(let t=a;t<=b-60;t+=30){ if(k===0&&t<m+30) continue; out.push(t);} });
   return out;
 }
-function pintaRes(){
+const T_RES={
+ dia:[L=>L('Para que dia?','Which day?'),L=>L('A casa abre todos os dias. Hoje só aparece se ainda houver horário.','Open every day. Today only shows if there is still time.')],
+ hora:[L=>L('Que horas?','What time?'),L=>L('Só os horários em que a cozinha está aberta nesse dia.','Only times when the kitchen is open that day.')],
+ pessoas:[L=>L('Quantas pessoas?','How many people?'),L=>L('Contando com você.','Including you.')],
+ ocasiao:[L=>L('É por algum motivo?','Any occasion?'),L=>L('Ajuda a equipe a escolher a mesa certa.','Helps the team pick the right table.')],
+ precisa:[L=>L('Precisa de algo?','Anything you need?'),L=>L('Opcional. Vai junto com a reserva para a equipe.','Optional. Goes to the team with your booking.')],
+ contato:[L=>L('Para quem é a reserva?','Who is the booking for?'),L=>L('A confirmação e o lembrete chegam nesse WhatsApp.','Confirmation and reminder arrive on this WhatsApp.')],
+ revisar:[L=>L('Está tudo certo?','Is everything right?'),L=>L('Confira antes de enviar. Dá para voltar e mudar qualquer resposta.','Check before sending. You can go back and change any answer.')]
+};
+const NOMES_ETAPA={dia:['Dia','Day'],hora:['Horário','Time'],pessoas:['Pessoas','Guests'],ocasiao:['Ocasião','Occasion'],precisa:['Pedidos','Requests'],contato:['Contato','Contact'],revisar:['Confirmar','Confirm']};
+function valorEtapa(e){
   const ds=diasRes();
-  if(R.dia===null){R.dia=ds.find(x=>horasDoDia(x.wd,x.k).length)?.k ?? 1;}
-  document.getElementById('r-dias').innerHTML=ds.map(x=>{const vazio=!horasDoDia(x.wd,x.k).length;
-    const nome=x.k===0?L('Hoje','Today'):x.k===1?L('Amanhã','Tomorrow'):(lang==='en'?DAYS[x.wd].slice(0,3):DIAS[x.wd].slice(0,3));
-    return `<button type="button" data-dia="${x.k}" aria-pressed="${R.dia===x.k}" ${vazio?'disabled':''}>${nome}<small>${x.dt.getDate()}/${x.dt.getMonth()+1}</small></button>`}).join('');
-  document.getElementById('r-pessoas').innerHTML=[1,2,3,4,5,6,7,8,'9+'].map(n=>`<button type="button" data-p="${n}" aria-pressed="${String(R.pessoas)===String(n)}">${n}</button>`).join('');
-  document.getElementById('r-grupo').innerHTML=R.pessoas==='9+'?L('Para grupos maiores, a equipe de eventos monta a mesa. <a href="#eventos">Pedir pelo formulário de eventos</a>.','For larger groups, the events team sets the table. <a href="#eventos">Use the events form</a>.'):'';
-  const x=ds[R.dia]; const hs=horasDoDia(x.wd,x.k);
-  if(!hs.includes(R.hora)) R.hora=null;
-  const alm=hs.filter(t=>t<900), noi=hs.filter(t=>t>=900);
-  const bt=t=>`<button type="button" data-h="${t}" aria-pressed="${R.hora===t}">${hm(t)}</button>`;
-  document.getElementById('r-horas').innerHTML=(alm.length?`<div class="turno">${L('Almoço','Lunch')}</div>${alm.map(bt).join('')}`:'')+(noi.length?`<div class="turno">${L('Noite','Evening')}</div>${noi.map(bt).join('')}`:'');
-  checaRes();
+  if(e==='dia'&&R.dia!==null) return fmtDia(ds[R.dia]);
+  if(e==='hora'&&R.hora!==null) return hm(R.hora);
+  if(e==='pessoas'&&R.pessoas) return String(R.pessoas);
+  if(e==='ocasiao'&&R.ocasiao) {const o=OCASIOES.find(x=>x[0]===R.ocasiao);return lang==='en'?o[2]:o[1];}
+  if(e==='precisa'&&ETAPAS.indexOf('precisa')<R.e) return R.precisa.length||R.restr?L(`${R.precisa.length+(R.restr?1:0)} pedido(s)`,`${R.precisa.length+(R.restr?1:0)} request(s)`):L('nada','none');
+  if(e==='contato'&&R.nome) return R.nome.split(' ')[0];
+  return '';
 }
-function checaRes(){
-  const ok=R.hora!==null && R.pessoas!=='9+' && document.getElementById('r-nome').value.trim() && document.getElementById('r-zap').value.replace(/\D/g,'').length>=10;
-  document.getElementById('r-ok').disabled=!ok;
-  const x=diasRes()[R.dia];
-  document.getElementById('r-resumo').textContent=R.hora!==null&&R.pessoas!=='9+'?L(`${R.pessoas} ${R.pessoas==1?'pessoa':'pessoas'}, ${DIAS[x.wd]} ${x.dt.getDate()}/${x.dt.getMonth()+1}, às ${hm(R.hora)}.`,`${R.pessoas} ${R.pessoas==1?'guest':'guests'}, ${DAYS[x.wd]} ${x.dt.getDate()}/${x.dt.getMonth()+1}, at ${hm(R.hora)}.`):'';
+function podeSeguir(){
+  const e=ETAPAS[R.e];
+  if(e==='dia') return R.dia!==null;
+  if(e==='hora') return R.hora!==null;
+  if(e==='pessoas') return R.pessoas && R.pessoas!=='9+';
+  if(e==='ocasiao') return !!R.ocasiao;
+  if(e==='precisa') return true;
+  if(e==='contato') return R.nome.trim().length>1 && R.zap.replace(/\D/g,'').length>=10;
+  return true;
 }
-document.getElementById('form-res').addEventListener('click',e=>{
-  const b=e.target.closest('button[type=button]'); if(!b) return;
-  if(b.dataset.dia!==undefined){R.dia=+b.dataset.dia;}
-  if(b.dataset.p!==undefined){R.pessoas=b.dataset.p==='9+'?'9+':+b.dataset.p;}
-  if(b.dataset.h!==undefined){R.hora=+b.dataset.h;}
+function pintaRes(){
+  const e=ETAPAS[R.e], ds=diasRes();
+  document.querySelectorAll('.etapa').forEach(x=>x.classList.toggle('on',x.dataset.e===e));
+  document.getElementById('trilha').innerHTML=ETAPAS.slice(0,7).map((k,i)=>`<li class="${i<R.e||ETAPAS[R.e]==='final'?'feito':i===R.e?'agora':''}">${L(...NOMES_ETAPA[k])}<span>${i<R.e&&k!=='revisar'?valorEtapa(k):(k==='revisar'&&ETAPAS[R.e]==='final'?(R.codigo||''):'')}</span></li>`).join('');
+  if(T_RES[e]){document.getElementById('q-'+e).textContent=T_RES[e][0](L);document.getElementById('d-'+e).textContent=T_RES[e][1](L);}
+  if(e==='dia') document.getElementById('r-dias').innerHTML=ds.map(x=>{const vazio=!horasDoDia(x.wd,x.k).length;const nome=x.k===0?L('Hoje','Today'):x.k===1?L('Amanhã','Tomorrow'):(lang==='en'?DAYS[x.wd].slice(0,3):DIAS[x.wd].slice(0,3));return `<button type="button" data-v="${x.k}" aria-pressed="${R.dia===x.k}" ${vazio?'disabled':''}>${nome}<small>${x.dt.getDate()}/${x.dt.getMonth()+1}${vazio?L(', encerrado',', closed'):''}</small></button>`}).join('');
+  if(e==='hora'){const x=ds[R.dia],hs=horasDoDia(x.wd,x.k),alm=hs.filter(t=>t<900),tar=hs.filter(t=>t>=900&&t<1050),noi=hs.filter(t=>t>=1050),bt=t=>`<button type="button" data-v="${t}" aria-pressed="${R.hora===t}">${hm(t)}</button>`;
+    document.getElementById('d-hora').textContent=L(`${fmtDia(x)}. `,`${fmtDia(x)}. `)+T_RES.hora[1](L);
+    document.getElementById('r-horas').innerHTML=(alm.length?`<div class="turno">${L('Almoço','Lunch')}</div>${alm.map(bt).join('')}`:'')+(tar.length?`<div class="turno">${L('Tarde','Afternoon')}</div>${tar.map(bt).join('')}`:'')+(noi.length?`<div class="turno">${L('Jantar','Dinner')}</div>${noi.map(bt).join('')}`:'');}
+  if(e==='pessoas'){document.getElementById('r-pessoas').innerHTML=[1,2,3,4,5,6,7,8,'9+'].map(n=>`<button type="button" data-v="${n}" aria-pressed="${String(R.pessoas)===String(n)}">${n}</button>`).join('');
+    document.getElementById('r-grupo').innerHTML=R.pessoas==='9+'?L('Para 9 pessoas ou mais, quem monta a mesa é a equipe de eventos. <a href="#eventos">Seguir pelo pedido de evento</a>.','For 9 or more, the events team sets the table. <a href="#eventos">Continue with an event request</a>.'):(R.pessoas>=6?L('Grupo grande: a equipe junta mesas e confirma pelo WhatsApp.','Large group: the team will join tables and confirm on WhatsApp.'):'');}
+  if(e==='ocasiao') document.getElementById('r-ocasiao').innerHTML=OCASIOES.map(o=>`<button type="button" data-v="${o[0]}" aria-pressed="${R.ocasiao===o[0]}">${lang==='en'?o[2]:o[1]}</button>`).join('');
+  if(e==='precisa'){document.getElementById('r-precisa').innerHTML=PRECISA.map(o=>`<label><input type="checkbox" value="${o[0]}" ${R.precisa.includes(o[0])?'checked':''}> ${lang==='en'?o[2]:o[1]}</label>`).join('');
+    document.getElementById('l-restr').textContent=R.ocasiao==='aniversario'?L('Alguma restrição alimentar ou recado para o aniversário?','Any dietary restriction or note for the birthday?'):L('Alguma restrição alimentar? (opcional)','Any dietary restriction? (optional)');
+    document.getElementById('r-restr').value=R.restr;}
+  if(e==='contato'){document.getElementById('l-nome').textContent=L('Nome','Name');document.getElementById('r-nome').value=R.nome;document.getElementById('r-zap').value=R.zap;}
+  if(e==='revisar'){const x=ds[R.dia],o=OCASIOES.find(z=>z[0]===R.ocasiao),pre=R.precisa.map(k=>{const q=PRECISA.find(z=>z[0]===k);return lang==='en'?q[2]:q[1];});if(R.restr)pre.push(R.restr);
+    const linhas=[[L('Dia','Day'),fmtDia(x)],[L('Horário','Time'),hm(R.hora)],[L('Pessoas','Guests'),R.pessoas],[L('Ocasião','Occasion'),lang==='en'?o[2]:o[1]],[L('Pedidos','Requests'),pre.join('; ')||L('nenhum','none')],[L('Nome','Name'),R.nome],['WhatsApp',R.zap]];
+    document.getElementById('r-revisao').innerHTML=linhas.map(([a,b])=>`<div><dt>${a}</dt><dd>${b}</dd></div>`).join('');}
+  const nav=document.getElementById('r-nav'); nav.style.display=e==='final'?'none':'flex';
+  const v=document.getElementById('r-voltar'); v.style.visibility=R.e?'visible':'hidden'; v.textContent=L('Voltar','Back');
+  const s=document.getElementById('r-seguir'); s.disabled=!podeSeguir(); s.textContent=e==='revisar'?L('Confirmar reserva','Confirm booking'):L('Continuar','Continue');
+}
+function vai(n){R.e=n;pintaRes();const f=document.getElementById('reservar');if(f.getBoundingClientRect().top<0)f.scrollIntoView();const h=document.querySelector('.etapa.on h3');if(h){h.tabIndex=-1;h.focus({preventScroll:true});}}
+document.getElementById('form-res').addEventListener('click',ev=>{
+  const b=ev.target.closest('.opcoes button'); if(!b) return;
+  const e=ETAPAS[R.e], v=b.dataset.v;
+  if(e==='dia'){ if(R.dia!==+v){R.hora=null;} R.dia=+v; }
+  if(e==='hora') R.hora=+v;
+  if(e==='pessoas') R.pessoas=v==='9+'?'9+':+v;
+  if(e==='ocasiao') R.ocasiao=v;
   pintaRes();
+  // escolha única que não pede mais nada: segue sozinho
+  if(['dia','hora','ocasiao'].includes(e) || (e==='pessoas'&&R.pessoas!=='9+'&&R.pessoas<6)) setTimeout(()=>vai(R.e+1),260);
 });
-['r-nome','r-zap'].forEach(id=>document.getElementById(id).addEventListener('input',checaRes));
-document.getElementById('form-res').addEventListener('submit',e=>{
-  e.preventDefault(); if(document.getElementById('r-ok').disabled) return;
-  const x=diasRes()[R.dia], nome=document.getElementById('r-nome').value.trim().split(' ')[0];
-  document.getElementById('r-feito-t').textContent=L(`Pronto, ${nome}. Mesa pedida para ${R.pessoas}, ${DIAS[x.wd]} às ${hm(R.hora)}.`,`Done, ${nome}. Table requested for ${R.pessoas}, ${DAYS[x.wd]} at ${hm(R.hora)}.`);
-  document.getElementById('r-feito-s').textContent=L('A Carbone confirma pelo WhatsApp em poucos minutos e manda um lembrete no dia. Para mudar ou cancelar, é só responder a mensagem.','Carbone will confirm on WhatsApp within minutes and remind you on the day. To change or cancel, just reply to the message.');
-  document.getElementById('res-passos').style.display='none'; document.getElementById('r-feito').classList.add('on');
-  conta('Reserva pedida no site');
+document.getElementById('form-res').addEventListener('change',ev=>{ if(ev.target.closest('#r-precisa')) R.precisa=[...document.querySelectorAll('#r-precisa input:checked')].map(x=>x.value); });
+document.getElementById('form-res').addEventListener('input',ev=>{
+  if(ev.target.id==='r-restr') R.restr=ev.target.value;
+  if(ev.target.id==='r-nome') R.nome=ev.target.value;
+  if(ev.target.id==='r-zap') R.zap=ev.target.value;
+  document.getElementById('r-seguir').disabled=!podeSeguir();
 });
+document.getElementById('form-res').addEventListener('submit',ev=>ev.preventDefault());
+document.getElementById('r-voltar').addEventListener('click',()=>vai(Math.max(0,R.e-1)));
+document.getElementById('r-seguir').addEventListener('click',()=>{
+  if(!podeSeguir()) return;
+  if(ETAPAS[R.e]==='revisar'){ confirmaRes(); return; }
+  vai(R.e+1);
+});
+function confirmaRes(){
+  vai(ETAPAS.indexOf('final')); conta('Reserva confirmada no site');
+  const x=diasRes()[R.dia];
+  R.codigo='CRB-'+String(x.dt.getDate()).padStart(2,'0')+String(R.hora/30|0).padStart(2,'0')+'-'+Math.random().toString(36).slice(2,5).toUpperCase();
+  document.getElementById('f-titulo').textContent=L('Conferindo a sua mesa','Checking your table');
+  document.getElementById('r-pronto').hidden=true;
+  const passos=[L('Pedido recebido','Request received'),L(`Mesa para ${R.pessoas}, ${fmtDia(x)}, às ${hm(R.hora)}`,`Table for ${R.pessoas}, ${fmtDia(x)} at ${hm(R.hora)}`),L('Pedidos repassados à equipe','Requests passed to the team'),L('Reserva confirmada','Booking confirmed')];
+  const ul=document.getElementById('r-status'); ul.innerHTML=passos.map(t=>`<li><i></i>${t}</li>`).join('');
+  [...ul.children].forEach((li,i)=>setTimeout(()=>li.classList.add('ok'),500+i*650));
+  setTimeout(()=>{
+    document.getElementById('f-titulo').textContent=L(`Reserva confirmada, ${R.nome.split(' ')[0]}.`,`Booking confirmed, ${R.nome.split(' ')[0]}.`);
+    document.getElementById('r-codigo').textContent=R.codigo;
+    document.getElementById('f-texto').textContent=L(`Mesa para ${R.pessoas}, ${fmtDia(x)}, às ${hm(R.hora)}. A confirmação chega no WhatsApp ${R.zap}, e um lembrete vai no dia, duas horas antes. Para mudar ou cancelar, é só responder a mensagem.`,`Table for ${R.pessoas}, ${fmtDia(x)}, at ${hm(R.hora)}. Confirmation goes to ${R.zap} on WhatsApp, with a reminder two hours before. To change or cancel, just reply.`);
+    const ini=new Date(x.dt);ini.setHours(R.hora/60|0,R.hora%60,0,0);const fim=new Date(ini.getTime()+2*3600e3);
+    const f=d=>`${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}T${String(d.getHours()).padStart(2,'0')}${String(d.getMinutes()).padStart(2,'0')}00`;
+    const ics=`BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Carbone prototipo//PT\r\nBEGIN:VEVENT\r\nUID:${R.codigo}@carbone\r\nDTSTART;TZID=America/Fortaleza:${f(ini)}\r\nDTEND;TZID=America/Fortaleza:${f(fim)}\r\nSUMMARY:Carbone Steakhouse, mesa para ${R.pessoas}\r\nLOCATION:Av. Desembargador Moreira, 1300, Aldeota, Fortaleza\r\nDESCRIPTION:Reserva ${R.codigo}\r\nEND:VEVENT\r\nEND:VCALENDAR`;
+    const a=document.getElementById('r-ics'); a.href='data:text/calendar;charset=utf-8,'+encodeURIComponent(ics); a.textContent=L('Pôr na agenda','Add to calendar');
+    document.getElementById('r-nova').textContent=L('Fazer outra reserva','Make another booking');
+    document.getElementById('r-pronto').hidden=false;
+  },500+passos.length*650);
+  document.getElementById('f-nota').textContent=L('Protótipo: nenhuma reserva foi enviada. No site publicado, a confirmação depende da agenda da casa: confirma na hora quando há mesa livre e manda para a equipe quando o grupo é grande ou há pedido especial.','Prototype: no booking was sent. On the live site, confirmation follows the house’s calendar: instant when a table is free, sent to the team for large groups or special requests.');
+}
+document.getElementById('r-nova').addEventListener('click',()=>{Object.assign(R,{dia:null,hora:null,pessoas:null,ocasiao:null,precisa:[],restr:'',codigo:null});vai(0);});
 
 /* ---------- cortes com peso ---------- */
 let gramas=250;
@@ -548,7 +654,7 @@ function pintaHoras(){
 }
 
 /* ---------- idioma ---------- */
-const EN={n0:'Book',resT:'Book a table',resL:'Pick the day, party size and time. Carbone confirms on WhatsApp and reminds you on the day.',rDia:'Which day?',rPessoas:'How many people?',rHora:'What time?',rVoce:'Who is it for?',fNome2:'Name',rObs:'A special occasion?',rConf:'Request the booking',rNota:'Prototype: no booking was sent. On the live site, the request goes into the house’s calendar, in GetIn or in the Timeless panel, as Carbone prefers.',demo:'Prototype made by Timeless for Carbone Steakhouse. Not the restaurant’s official website.',n1:'Cuts',n2:'Menu',n3:'Drinks',n4:'The house',n5:'Events',
+const EN={n0:'Book',resT:'Book a table',resL:'One question at a time. At the end, Carbone checks the table and your booking is confirmed, with a code.',demo:'Prototype made by Timeless for Carbone Steakhouse. Not the restaurant’s official website.',n1:'Cuts',n2:'Menu',n3:'Drinks',n4:'The house',n5:'Events',
  cortesT:'Off the parrilla',cortesL:'Every cut comes in 250 g or 500 g. The bar shows the weight on your plate.',selT:'Special selection, to share',
  cartaT:'The rest of the table',cartaL:'Starters, fire kitchen, sides and desserts. Prices from the digital menu, 23 Nov 2026.',sem:'Hide dishes with',gluten:'gluten',lactose:'lactose',ovo:'egg',
  casaT:'Which flame inspires you?',casaL:'The question is painted on the dining-room wall. Carbone is at BS Design, Av. Desembargador Moreira, 1300, Aldeota.',
