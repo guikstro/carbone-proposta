@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Carbone Steakhouse · protótipo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Paleta: cinza de carvão frio, tinta de fuligem, cor de carne. O calor vem das fotos da casa. */
+:root{
+  --cinza:#E4E1DB; --cinza-2:#D5D1C9; --tinta:#22201D; --tinta-2:#5C5852; --carne:#7A2418; --brasa:#E06A2C;
+  --serif:'Libre Baskerville',Baskerville,Georgia,serif; --sans:'Jost','Futura',system-ui,sans-serif;
+  --foto:'https://static.wixstatic.com/media/404bb8_';
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:20px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{background:var(--cinza);color:var(--tinta);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img{display:block;max-width:100%}
+:focus-visible{outline:3px solid var(--carne);outline-offset:3px}
+.demo{background:var(--tinta);color:var(--cinza);font-size:14px;text-align:center;padding:8px 16px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 28px}
+
+/* topo */
+.topo{display:flex;align-items:center;gap:28px;padding:18px 28px;max-width:1200px;margin:0 auto}
+.topo .wm{height:30px;width:auto;filter:invert(1);mix-blend-mode:multiply}
+.topo nav{display:flex;gap:24px;margin-left:auto;font-size:16px}
+.topo nav a{text-decoration:none;padding:10px 0}
+.topo nav a:hover{text-decoration:underline;text-underline-offset:5px}
+.lang{background:none;border:1px solid var(--tinta);font:500 14px var(--sans);min-height:44px;min-width:52px;cursor:pointer;color:var(--tinta)}
+
+/* agora: a peça que muda com o relógio */
+.agora{display:grid;grid-template-columns:1.35fr 1fr;min-height:calc(100vh - 110px);max-height:860px}
+.agora .foto{background:#1b1917 center/cover no-repeat;position:relative}
+.agora .foto figcaption{position:absolute;left:20px;bottom:16px;color:#e9e4da;font-size:13px;opacity:.85}
+.estado{padding:56px 52px 44px;display:flex;flex-direction:column}
+.relogio{display:flex;align-items:center;gap:12px;font-size:16px;color:var(--tinta-2)}
+.chama{width:14px;height:20px;background:var(--brasa);clip-path:polygon(50% 0,100% 62%,78% 100%,22% 100%,0 62%);transition:transform .6s,background .6s}
+.estado.apagada .chama{background:#9a958c;transform:scaleY(.45) translateY(10px)}
+.estado.descansa .chama{background:#b86a43;transform:scaleY(.7) translateY(4px)}
+.estado h1{font-family:var(--serif);font-weight:400;font-size:clamp(40px,4.6vw,66px);line-height:1.1;letter-spacing:-.01em;margin:22px 0 14px}
+.estado .sub{font-size:19px;color:var(--tinta-2);max-width:30ch}
+.vale{margin-top:auto;padding-top:36px}
+.vale h2{font-family:var(--serif);font-style:italic;font-weight:400;font-size:19px;margin-bottom:10px}
+.oferta{border-top:2px solid var(--tinta);padding:14px 0 4px}
+.oferta b{display:block;font-family:var(--serif);font-weight:700;font-size:20px}
+.oferta span{color:var(--tinta-2);font-size:16px}
+.reservar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:26px;background:var(--carne);color:#F3EDE6;text-decoration:none;padding:0 22px;min-height:60px;font-size:18px;font-weight:500}
+.reservar:hover{background:#5f1b11}
+.reservar small{font-size:14px;opacity:.8;font-weight:400}
+
+/* cortes */
+.cortes{padding:110px 0 90px}
+.cab{display:grid;grid-template-columns:1fr auto;align-items:end;gap:24px;margin-bottom:34px}
+.cab h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4vw,54px);line-height:1.1}
+.cab p{color:var(--tinta-2);max-width:56ch;margin-top:10px}
+.peso{display:flex;border:2px solid var(--tinta)}
+.peso button{background:none;border:0;font:500 16px var(--sans);padding:0 18px;min-height:48px;cursor:pointer;color:var(--tinta)}
+.peso button[aria-pressed=true]{background:var(--tinta);color:var(--cinza)}
+.corte{display:grid;grid-template-columns:minmax(200px,1.1fr) 2fr 90px;gap:28px;align-items:center;padding:20px 0;border-top:1px solid #b9b4ab}
+.corte:last-child{border-bottom:1px solid #b9b4ab}
+.corte h3{font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.15}
+.corte p{font-size:15px;color:var(--tinta-2);margin-top:4px}
+.barra{height:22px;background:var(--cinza-2);position:relative}
+.barra i{position:absolute;inset:0 auto 0 0;background:var(--carne);transition:width .5s cubic-bezier(.2,.7,.2,1)}
+.barra span{position:absolute;left:calc(var(--w) + 10px);top:50%;transform:translateY(-50%);font-size:14px;color:var(--tinta-2);white-space:nowrap;transition:left .5s cubic-bezier(.2,.7,.2,1)}
+.corte .preco{font-family:var(--serif);font-size:24px;text-align:right;white-space:nowrap;color:var(--carne);font-variant-numeric:tabular-nums}
+.selecao{margin-top:56px}
+.selecao h3.t{font-family:var(--serif);font-style:italic;font-weight:400;font-size:24px;margin-bottom:6px}
+
+/* duas fotos que separam os capítulos */
+.par{display:grid;grid-template-columns:1fr 1.4fr;gap:6px;height:min(62vh,560px)}
+.par div{background:#1b1917 center/cover no-repeat}
+
+/* cardápio completo */
+.carta{padding:100px 0}
+.ctrl{display:flex;flex-wrap:wrap;gap:10px 26px;align-items:center;margin:18px 0 8px;font-size:16px}
+.ctrl label{display:inline-flex;align-items:center;gap:8px;min-height:44px;cursor:pointer}
+.ctrl input{accent-color:var(--carne);width:18px;height:18px}
+.aviso{color:var(--carne);font-size:15px;min-height:1.6em}
+.colunas{columns:3 300px;column-gap:48px;margin-top:20px}
+.grupo{break-inside:avoid;padding:26px 0 6px}
+.grupo h3{font-family:var(--serif);font-style:italic;font-weight:400;font-size:22px;margin-bottom:6px}
+.item{padding:9px 0;break-inside:avoid}
+.item .n{font-weight:500}
+.item .p{color:var(--carne);font-family:var(--serif);margin-left:8px;font-variant-numeric:tabular-nums}
+.item .d{font-size:15px;color:var(--tinta-2);line-height:1.5}
+.item .al{font-size:13px;color:#857f76}
+.item.oculto{display:none}
+.antes{display:none}
+body.revisao .antes{display:block;font-size:13px;color:#a2341f;text-decoration:line-through}
+body.revisao .item.sem-info .al{color:#a2341f}
+body.revisao .item.tem-fix .n{box-shadow:inset 0 -7px 0 rgba(224,106,44,.35)}
+
+/* casa */
+.casa{background:var(--tinta);color:#E9E4DA}
+.casa .grade{display:grid;grid-template-columns:1.2fr 1fr;min-height:640px}
+.casa .foto{background:center/cover no-repeat}
+.casa .info{padding:80px 56px}
+.casa h2{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(34px,3.8vw,50px);line-height:1.12}
+.casa .end{color:#bdb6aa;margin:14px 0 34px}
+.horas{list-style:none}
+.horas li{display:flex;justify-content:space-between;gap:18px;padding:10px 0;border-top:1px solid #45413b;font-variant-numeric:tabular-nums}
+.horas li.hoje{color:#F2B48C}
+.diverge{display:none;font-size:14px;color:#F2B48C;margin-top:12px;max-width:52ch}
+body.revisao .diverge{display:block}
+.links{display:flex;gap:22px;margin-top:30px;flex-wrap:wrap}
+.links a{min-height:44px;display:inline-flex;align-items:center;text-underline-offset:5px}
+
+/* eventos */
+.ev{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.ev .foto{background:center/cover no-repeat;min-height:620px}
+.ev .f{padding:80px 56px}
+.ev h2{font-family:var(--serif);font-weight:400;font-size:clamp(32px,3.6vw,48px);line-height:1.12}
+.ev p.l{color:var(--tinta-2);margin:12px 0 28px;max-width:46ch}
+form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+form label{display:grid;gap:4px;font-size:15px;color:var(--tinta-2)}
+form .full{grid-column:1/-1}
+input,select,textarea{background:transparent;border:0;border-bottom:2px solid var(--tinta);color:var(--tinta);font:400 17px var(--sans);padding:10px 2px;min-height:48px;width:100%;border-radius:0}
+textarea{min-height:80px;resize:vertical}
+form button{grid-column:1/-1;background:var(--carne);color:#F3EDE6;border:0;font:500 18px var(--sans);min-height:56px;cursor:pointer;margin-top:8px}
+.previa{grid-column:1/-1;white-space:pre-line;font-size:15px;background:var(--cinza-2);padding:14px 16px;display:none}
+.previa.on{display:block}
+
+/* bebidas */
+.beb{padding:100px 0}
+.beb .topo-b{display:grid;grid-template-columns:1fr 1.2fr;gap:48px;align-items:center}
+.beb .copo{background:center/cover no-repeat;aspect-ratio:4/5}
+
+footer{padding:40px 28px 140px;max-width:1200px;margin:0 auto;color:var(--tinta-2);font-size:15px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+/* ferramentas do protótipo */
+.ferr{position:fixed;left:0;right:0;bottom:0;z-index:30;background:#F3F1ED;border-top:2px solid var(--tinta);display:flex;align-items:center;gap:18px;padding:8px 20px;flex-wrap:wrap;font-size:15px}
+.ferr strong{font-weight:500}
+.so-cel{display:none}
+@media (max-width:900px){.so-cel{display:inline}}
+.ferr input[type=range]{accent-color:var(--carne);width:200px}
+.ferr select{border:1px solid var(--tinta);min-height:40px;width:auto;padding:0 8px;font-size:15px}
+.ferr button{background:none;border:1px solid var(--tinta);font:500 15px var(--sans);min-height:40px;padding:0 14px;cursor:pointer;color:var(--tinta)}
+.ferr button[aria-pressed=true]{background:var(--tinta);color:var(--cinza)}
+.ferr .sp{margin-left:auto}
+.painel{position:fixed;right:20px;bottom:72px;z-index:31;width:310px;background:#F3F1ED;border:2px solid var(--tinta);padding:18px;display:none}
+.painel.on{display:block}
+.painel h4{font-family:var(--serif);font-weight:400;font-size:20px;margin-bottom:8px}
+.painel ol{list-style:none;font-size:15px}
+.painel li{display:flex;justify-content:space-between;padding:7px 0;border-top:1px solid #c9c4bb}
+.painel small{display:block;color:var(--tinta-2);font-size:13px;margin-top:10px}
+
+@media (max-width:900px){
+  .topo nav{display:none}
+  .agora{grid-template-columns:1fr;max-height:none}
+  .agora .foto{min-height:46vh}
+  .estado{padding:34px 22px 30px}
+  .cab{grid-template-columns:1fr}
+  .corte{grid-template-columns:1fr 80px;gap:10px 16px}
+  .corte .barra{grid-column:1/-1;grid-row:2}
+  .par{grid-template-columns:1fr;height:auto}.par div{height:44vh}
+  .casa .grade,.ev,.beb .topo-b{grid-template-columns:1fr}
+  .casa .foto,.ev .foto{min-height:50vh}
+  .casa .info,.ev .f{padding:48px 22px}
+  form{grid-template-columns:1fr}
+  .wrap{padding:0 22px}
+  .ferr{gap:8px;padding:8px 12px;font-size:14px;flex-wrap:nowrap;overflow-x:auto}
+  .ferr strong{display:none}
+  .ferr input[type=range]{width:110px;flex:none}
+  .ferr input[type=range]:disabled{display:none}
+  .ferr .sp{margin-left:0}
+  .ferr button,.ferr select{flex:none;white-space:nowrap}
+  .reservar small{display:none}
+  .painel{left:12px;right:12px;width:auto;bottom:64px}
+}
+</style>
+</head>
+<body>
+<div class="demo" data-t="demo">Protótipo feito pela Timeless para a Carbone Steakhouse. Não é o site oficial da casa.</div>
+
+<div class="topo">
+  <img class="wm" src="https://static.wixstatic.com/media/404bb8_23b0ee6b7e3e41c4affd602fd9decfc6~mv2.png/v1/fill/w_377,h_277,al_c,q_85/carbone.png" alt="Carbone" style="height:56px">
+  <nav aria-label="Seções">
+    <a href="#cortes" data-t="n1">Cortes</a>
+    <a href="#carta" data-t="n2">Cardápio</a>
+    <a href="#bebidas" data-t="n3">Bebidas</a>
+    <a href="#casa" data-t="n4">A casa</a>
+    <a href="#eventos" data-t="n5">Eventos</a>
+  </nav>
+  <button class="lang" type="button" id="lang" aria-label="Read in English">EN</button>
+</div>
+
+<main>
+  <section class="agora" aria-live="polite">
+    <figure class="foto" id="foto-agora"><figcaption>Parrilla da Carbone · foto do site do Grupo Social Clube</figcaption></figure>
+    <div class="estado" id="estado">
+      <div class="relogio"><span class="chama" aria-hidden="true"></span><span id="relogio"></span></div>
+      <h1 id="estado-t"></h1>
+      <p class="sub" id="estado-s"></p>
+      <div class="vale">
+        <h2 id="vale-t"></h2>
+        <div id="ofertas"></div>
+        <a class="reservar" href="https://widget.getinapp.com.br/yPAAvWPz" target="_blank" rel="noopener" data-evt="Reservar (primeira tela)"><span id="res-t"></span><small id="res-s"></small></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cortes" id="cortes">
+    <div class="wrap">
+      <div class="cab">
+        <div>
+          <h2 data-t="cortesT">Saindo da parrilla</h2>
+          <p data-t="cortesL">Cada corte sai em 250 g ou 500 g. A barra mostra o peso no prato.</p>
+        </div>
+        <div class="peso" role="group" aria-label="Peso">
+          <button type="button" data-g="250" aria-pressed="true">250 g</button>
+          <button type="button" data-g="500" aria-pressed="false">500 g</button>
+        </div>
+      </div>
+      <div id="steaks"></div>
+      <div class="selecao">
+        <h3 class="t" data-t="selT">Seleção especial, para dividir</h3>
+        <div id="especiais"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="par" aria-hidden="true">
+    <div id="ph-a"></div><div id="ph-b"></div>
+  </div>
+
+  <section class="carta" id="carta">
+    <div class="wrap">
+      <div class="cab" style="margin-bottom:0">
+        <div>
+          <h2 data-t="cartaT">O resto da mesa</h2>
+          <p data-t="cartaL">Entradas, cozinha do fogo, acompanhamentos e sobremesas. Preços do cardápio digital em 23/11/2026.</p>
+        </div>
+      </div>
+      <div class="ctrl" role="group" aria-label="Filtrar por alergênico">
+        <span data-t="sem">Esconder pratos com</span>
+        <label><input type="checkbox" value="glúten"> <span data-t="gluten">glúten</span></label>
+        <label><input type="checkbox" value="lactose"> <span data-t="lactose">lactose</span></label>
+        <label><input type="checkbox" value="ovo"> <span data-t="ovo">ovo</span></label>
+      </div>
+      <div class="aviso" id="aviso" aria-live="polite"></div>
+      <div class="colunas" id="lista"></div>
+    </div>
+  </section>
+
+  <section class="casa" id="casa">
+    <div class="grade">
+      <div class="foto" id="ph-casa"></div>
+      <div class="info">
+        <h2 data-t="casaT">Qual chama te inspira?</h2>
+        <p class="end" data-t="casaL">A frase está na parede do salão. A casa fica no BS Design, Av. Desembargador Moreira, 1300, Aldeota.</p>
+        <ul class="horas" id="horas"></ul>
+        <p class="diverge" data-t="diverge">Revisão: o Tripadvisor mostra segunda e terça sem pausa à tarde, e o CEP do Instagram (60150-150) é diferente do Linktree e do Tripadvisor (60191-156). No site, um horário só alimenta o Google, o Instagram e o Tripadvisor.</p>
+        <div class="links">
+          <a href="https://www.google.com/maps/search/?api=1&query=Av.+Des.+Moreira,+1300+-+Aldeota,+Fortaleza+-+CE" target="_blank" rel="noopener" data-evt="Rota" data-t="rota">Abrir rota no mapa</a>
+          <a href="https://www.ifood.com.br/delivery/fortaleza-ce/carbone-steakhouse-meireles/062d7c7e-aa71-4d09-ab44-ff64ab2edb2f" target="_blank" rel="noopener" data-evt="iFood" data-t="ifood">Pedir pelo iFood</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="beb" id="bebidas">
+    <div class="wrap">
+      <div class="topo-b">
+        <div class="copo" id="ph-copo" role="img" aria-label="Drink de morango servido na Carbone"></div>
+        <div>
+          <h2 style="font-family:var(--serif);font-weight:400;font-size:clamp(34px,4vw,54px);line-height:1.1" data-t="bebT">Para beber</h2>
+          <p style="color:var(--tinta-2);margin-top:10px;max-width:46ch" data-t="bebL">Seis drinks autorais, clássicos, whiskies, destilados e cervejas. O vinho hoje sai só em taça.</p>
+          <div id="autorais" style="margin-top:20px"></div>
+        </div>
+      </div>
+      <div class="colunas" id="lista-beb"></div>
+    </div>
+  </section>
+
+  <section class="ev" id="eventos">
+    <div class="foto" id="ph-ev"></div>
+    <div class="f">
+      <h2 data-t="evT">Comemorar na Carbone</h2>
+      <p class="l" data-t="evL">Aniversário, jantar de empresa ou confraternização. A equipe de eventos recebe o pedido com data, número de pessoas e o que você imagina.</p>
+      <form id="form-evento" novalidate>
+        <label><span data-t="fNome">Seu nome</span><input name="nome" autocomplete="name"></label>
+        <label><span data-t="fData">Data</span><input name="data" type="date"></label>
+        <label><span data-t="fPessoas">Pessoas</span><input name="pessoas" type="number" min="8" inputmode="numeric"></label>
+        <label><span data-t="fTipo">Ocasião</span><select name="tipo"><option>Aniversário</option><option>Empresa</option><option>Casamento</option><option>Outra</option></select></label>
+        <label class="full"><span data-t="fObs">Algo mais?</span><textarea name="obs"></textarea></label>
+        <button type="submit" data-t="fEnviar">Montar o pedido</button>
+        <div class="previa" id="previa" aria-live="polite"></div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>Carbone Steakhouse, do Grupo Social Clube</span>
+  <span data-t="rodape">Protótipo da Timeless. Fotos do site do Grupo Social Clube, horários da bio do Instagram em 23/11/2026.</span>
+</footer>
+
+<div class="ferr" role="region" aria-label="Ferramentas do protótipo">
+  <strong>Testar a primeira tela em outro horário:</strong>
+  <span class="so-cel" aria-hidden="true">Horário:</span>
+  <select id="sim-dia" aria-label="Dia da semana"><option value="">agora</option><option value="0">domingo</option><option value="1">segunda</option><option value="2">terça</option><option value="3">quarta</option><option value="4">quinta</option><option value="5">sexta</option><option value="6">sábado</option></select>
+  <input type="range" id="sim-hora" min="0" max="1439" step="15" aria-label="Hora do dia" disabled>
+  <span id="sim-label"></span>
+  <button type="button" id="b-revisao" class="sp" aria-pressed="false">Ver o que corrigimos</button>
+  <button type="button" id="b-painel" aria-pressed="false">Painel da casa</button>
+</div>
+<aside class="painel" id="painel" aria-label="Painel da casa">
+  <h4>O que a casa veria</h4>
+  <ol id="painel-lista"></ol>
+  <small>Cada toque vira um número no relatório do mês. Aqui conta só o que você fez nesta tela.</small>
+</aside>
+
+<script src="cardapio.js"></script>
+<script>
+const F=(id,w=1600,h=1000)=>`url(https://static.wixstatic.com/media/404bb8_${id}~mv2.jpg/v1/fill/w_${w},h_${h},al_c,q_82,enc_auto/carbone.jpg)`;
+const bg=(el,id,w,h)=>document.getElementById(el).style.backgroundImage=F(id,w,h);
+bg('foto-agora','b50357c2cd784e218c77cbd95d064915',1800,1400);
+bg('ph-a','a55b18b3cba64bc6b264f75f93f43b25',900,1000);
+bg('ph-b','207696ff0f4745b1a773bd035f1f4d9b',1400,1000);
+bg('ph-casa','6c40c02fdfe843328726e8d87c9565b9',1400,1200);
+bg('ph-copo','504654b35bfc494a99062578c8ee9a94',900,1100);
+bg('ph-ev','dfe31c6a74a24fe2b6ad75b100e4bc8c',1200,1300);
+
+let lang='pt';
+const L=(pt,en)=>lang==='en'?en:pt;
+const brl=n=>'R$ '+n.toLocaleString('pt-BR');
+
+/* ---------- a primeira tela: estado da brasa pelo relógio de Fortaleza ---------- */
+// Horários da bio do Instagram (23/11/2026). Minutos desde 0h.
+const HOR={0:[[690,1320]],1:[[690,900],[1050,1380]],2:[[690,900],[1050,1380]],3:[[690,900],[1050,1380]],4:[[690,1380]],5:[[690,1410]],6:[[690,1410]]};
+const DIAS=['domingo','segunda','terça','quarta','quinta','sexta','sábado'], DAYS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const hm=m=>{const h=Math.floor(m/60),n=m%60;return lang==='en'?`${h}:${String(n).padStart(2,'0')}`:`${h}h${n?String(n).padStart(2,'0'):''}`;};
+function agoraFortaleza(){
+  const p=new Intl.DateTimeFormat('en-US',{timeZone:'America/Fortaleza',weekday:'short',hour:'numeric',minute:'numeric',hour12:false}).formatToParts(new Date());
+  const g=t=>p.find(x=>x.type===t).value; const wd=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(g('weekday'));
+  return {d:wd,m:(parseInt(g('hour'))%24)*60+parseInt(g('minute'))};
+}
+let sim=null;
+function pintaAgora(){
+  const {d,m}=sim||agoraFortaleza(); const t=HOR[d]; const el=document.getElementById('estado');
+  const aberto=t.find(([a,b])=>m>=a&&m<b), prox=t.find(([a])=>m<a);
+  let est, titulo, sub, ofertas=[], res, resS;
+  if(aberto){
+    est='acesa'; titulo=L('A brasa está acesa.','The fire is lit.');
+    sub=L(`A cozinha vai até ${hm(aberto[1])} hoje.`,`The kitchen is open until ${hm(aberto[1])} today.`);
+    res=L('Reservar mesa para hoje','Book a table for today');
+  } else if(prox){
+    est=prox[0]===690?'apagada':'descansa';
+    titulo= prox[0]===690 ? L('A brasa acende às 11h30.','The fire is lit at 11:30.') : L(`A brasa descansa até ${hm(prox[0])}.`,`The fire rests until ${hm(prox[0])}.`);
+    sub= prox[0]===690 ? L('Ainda dá tempo de garantir a mesa do almoço.','There is still time to book lunch.') : L('Entre o almoço e o jantar. A noite já pode ser reservada.','Between lunch and dinner. Tonight can already be booked.');
+    res=L('Reservar mesa para hoje','Book a table for today');
+  } else {
+    est='apagada'; titulo=L('A brasa apagou por hoje.','The fire is out for today.');
+    sub=L(`Volta ${DIAS[(d+1)%7]} às 11h30.`,`Back on ${DAYS[(d+1)%7]} at 11:30.`);
+    res=L('Reservar para amanhã','Book for tomorrow');
+  }
+  const almoco = m<900 && d>=1 && d<=5;
+  const noite = m>=900 && d<=4;
+  if(almoco) ofertas.push([L('Menu executivo','Executive lunch menu'),L('No almoço, com cardápio próprio no cardápio digital da casa.','At lunch, with its own page on the house’s digital menu.')]);
+  if(noite || (!aberto && !prox && d<=3) ) ofertas.push([L('Noite de Fogo, R$ 98 por pessoa','Fire Night, R$ 98 per person'),L('Entrada, principal e sobremesa. Open wine por mais R$ 59, de domingo a quinta.','Starter, main and dessert. Open wine for R$ 59 more, Sunday to Thursday.')]);
+  if(!almoco && !noite && (d===5||d===6)) ofertas.push([L('Sexta e sábado até 23h30','Friday and Saturday until 23:30'),L('As noites mais cheias da semana. Reserve antes de sair de casa.','The busiest nights of the week. Book before you leave home.')]);
+  ofertas.push([L('4,9 no Tripadvisor','4.9 on Tripadvisor'),L('1.266 avaliações e Travellers’ Choice 2026.','1,266 reviews and Travellers’ Choice 2026.')]);
+  el.className='estado '+est;
+  document.getElementById('relogio').textContent=L(`${DIAS[d]}, ${hm(m)} em Fortaleza`,`${DAYS[d]}, ${hm(m)} in Fortaleza`);
+  document.getElementById('estado-t').textContent=titulo;
+  document.getElementById('estado-s').textContent=sub;
+  document.getElementById('vale-t').textContent=L('O que vale agora','What’s on now');
+  document.getElementById('ofertas').innerHTML=ofertas.slice(0,2).map(([b,s])=>`<div class="oferta"><b>${b}</b><span>${s}</span></div>`).join('');
+  document.getElementById('res-t').textContent=res;
+  document.getElementById('res-s').textContent=L('pelo GetIn, como hoje','via GetIn, as today');
+  document.getElementById('sim-label').textContent=sim?hm(sim.m):'';
+}
+const sd=document.getElementById('sim-dia'), sh=document.getElementById('sim-hora');
+sd.addEventListener('change',()=>{ if(sd.value===''){sim=null;sh.disabled=true;} else {sh.disabled=false; sim={d:+sd.value,m:+sh.value||1200};sh.value=sim.m;} pintaAgora(); conta('Simulou horário');});
+sh.addEventListener('input',()=>{ if(sim){sim.m=+sh.value; pintaAgora();}});
+setInterval(()=>{if(!sim)pintaAgora()},30000);
+
+/* ---------- cortes com peso ---------- */
+let gramas=250;
+const steaks=CARDAPIO.find(g=>g.cat.includes('steaks')).itens;
+const especiais=CARDAPIO.find(g=>g.cat.includes('seleção')).itens;
+const MAXG=950;
+function gDe(i){const m=(i.d||'').match(/(\d+)\s*g/);return m?+m[1]:0;}
+function corteHTML(i,g,preco){
+  const w=(g/MAXG*84).toFixed(1)+'%'; // 84%: sobra espaço para o rótulo do peso
+  const nome=lang==='en'&&i.en?i.en[0]:i.n, desc=(lang==='en'&&i.en?i.en[1]:i.d).replace(/\.?\s*\d+\s*g$/,'.');
+  return `<div class="corte"><div><h3>${nome}</h3><p>${desc}</p></div>
+  <div class="barra" style="--w:${w}"><i style="width:${w}"></i><span>${g} g</span></div>
+  <div class="preco">${brl(preco)}</div></div>`;
+}
+function pintaCortes(){
+  document.getElementById('steaks').innerHTML=steaks.map(i=>corteHTML(i,gramas,gramas===500?i.p2:i.p)).join('');
+  document.getElementById('especiais').innerHTML=especiais.map(i=>corteHTML(i,gDe(i),i.p)).join('');
+}
+document.querySelectorAll('.peso button').forEach(b=>b.addEventListener('click',()=>{
+  gramas=+b.dataset.g; document.querySelectorAll('.peso button').forEach(x=>x.setAttribute('aria-pressed',x===b)); pintaCortes(); conta('Trocou o peso');
+}));
+
+/* ---------- carta completa ---------- */
+const ALG_EN={'glúten':'gluten','lactose':'lactose','ovo':'egg','soja':'soy','castanhas':'nuts','corantes':'colourings'};
+function itemHTML(i){
+  const n=lang==='en'&&i.en?i.en[0]:i.n, d=lang==='en'&&i.en?i.en[1]:(i.d||'');
+  const preco=i.p2?`${i.p} · ${i.p2}`:i.p;
+  let al='';
+  if('a' in i) al=i.a?L('Alergênicos: ','Allergens: ')+(lang==='en'?i.a.map(x=>ALG_EN[x]):i.a).join(', '):L('Alergênicos: pergunte ao garçom','Allergens: ask your waiter');
+  const c=['item']; if('a' in i&&!i.a)c.push('sem-info'); if(i.fix)c.push('tem-fix');
+  return `<div class="${c.join(' ')}" data-a="${i.a?i.a.join(','):''}" data-info="${'a' in i?(i.a?1:0):''}"><div><span class="n">${n}</span><span class="p">${preco}</span></div>${d?`<div class="d">${d}</div>`:''}${al?`<div class="al">${al}</div>`:''}${i.fix?`<div class="antes">${L('antes','before')}: ${i.fix}</div>`:''}</div>`;
+}
+const grupoHTML=g=>`<div class="grupo"><h3>${lang==='en'?g.en:g.cat}</h3>${g.fixCat?`<div class="antes">${L('antes','before')}: ${g.fixCat}</div>`:''}${g.itens.map(itemHTML).join('')}</div>`;
+function pintaCarta(){
+  document.getElementById('lista').innerHTML=CARDAPIO.filter(g=>!g.cat.includes('steaks')&&!g.cat.includes('seleção')).map(grupoHTML).join('');
+  document.getElementById('autorais').innerHTML=grupoHTML(BEBIDAS[0]).replace('<h3>','<h3 style="display:none">');
+  document.getElementById('lista-beb').innerHTML=BEBIDAS.slice(1).map(grupoHTML).join('');
+  filtrar(true);
+}
+function filtrar(silencio){
+  const sem=[...document.querySelectorAll('.ctrl input:checked')].map(x=>x.value); let semInfo=0;
+  document.querySelectorAll('#lista .item').forEach(el=>{
+    const s=el.dataset.info==='0', a=el.dataset.a.split(',');
+    const esc=sem.length&&(s||sem.some(x=>a.includes(x))); el.classList.toggle('oculto',!!esc); if(esc&&s)semInfo++;
+  });
+  document.getElementById('aviso').textContent=sem.length&&semInfo?L(`${semInfo} pratos saíram da lista porque a casa ainda não informa os alergênicos deles.`,`${semInfo} dishes were hidden because the house hasn’t listed their allergens yet.`):'';
+  if(sem.length&&!silencio)conta('Filtro de alergênico');
+}
+document.querySelectorAll('.ctrl input').forEach(c=>c.addEventListener('change',()=>filtrar()));
+
+/* ---------- horários ---------- */
+function pintaHoras(){
+  const {d}=agoraFortaleza();
+  document.getElementById('horas').innerHTML=[0,1,2,3,4,5,6].map(k=>`<li class="${k===d?'hoje':''}"><span>${lang==='en'?DAYS[k]:DIAS[k][0].toUpperCase()+DIAS[k].slice(1)}${k===d?L(' (hoje)',' (today)'):''}</span><span>${HOR[k].map(([a,b])=>hm(a)+L(' às ','–')+hm(b)).join(L(' e ',', '))}</span></li>`).join('');
+}
+
+/* ---------- idioma ---------- */
+const EN={demo:'Prototype made by Timeless for Carbone Steakhouse. Not the restaurant’s official website.',n1:'Cuts',n2:'Menu',n3:'Drinks',n4:'The house',n5:'Events',
+ cortesT:'Off the parrilla',cortesL:'Every cut comes in 250 g or 500 g. The bar shows the weight on your plate.',selT:'Special selection, to share',
+ cartaT:'The rest of the table',cartaL:'Starters, fire kitchen, sides and desserts. Prices from the digital menu, 23 Nov 2026.',sem:'Hide dishes with',gluten:'gluten',lactose:'lactose',ovo:'egg',
+ casaT:'Which flame inspires you?',casaL:'The question is painted on the dining-room wall. Carbone is at BS Design, Av. Desembargador Moreira, 1300, Aldeota.',
+ diverge:'Review: Tripadvisor lists Monday and Tuesday without the afternoon break, and the Instagram postcode (60150-150) differs from Linktree and Tripadvisor (60191-156). On the website, one set of hours feeds Google, Instagram and Tripadvisor.',
+ rota:'Open directions',ifood:'Order on iFood',bebT:'To drink',bebL:'Six house cocktails, classics, whiskies, spirits and beer. Wine is by the glass only, for now.',
+ evT:'Celebrate at Carbone',evL:'Birthdays, team dinners, celebrations. The events team gets your request with the date, number of guests and what you have in mind.',
+ fNome:'Your name',fData:'Date',fPessoas:'Guests',fTipo:'Occasion',fObs:'Anything else?',fEnviar:'Build the request',
+ rodape:'Timeless prototype. Photos from the Grupo Social Clube website, hours from the Instagram bio on 23 Nov 2026.'};
+const PT={}; document.querySelectorAll('[data-t]').forEach(e=>PT[e.dataset.t]=e.innerHTML);
+document.getElementById('lang').addEventListener('click',e=>{
+  lang=lang==='pt'?'en':'pt'; document.documentElement.lang=lang==='en'?'en':'pt-BR';
+  e.currentTarget.textContent=lang==='en'?'PT':'EN'; e.currentTarget.setAttribute('aria-label',lang==='en'?'Ler em português':'Read in English');
+  document.querySelectorAll('[data-t]').forEach(x=>{const v=lang==='en'?EN[x.dataset.t]:PT[x.dataset.t]; if(v)x.innerHTML=v;});
+  tudo(); if(lang==='en')conta('Leu em inglês');
+});
+
+/* ---------- pedido de evento ---------- */
+document.getElementById('form-evento').addEventListener('submit',e=>{
+  e.preventDefault(); const f=new FormData(e.target);
+  const data=f.get('data')?new Date(f.get('data')+'T12:00').toLocaleDateString('pt-BR'):'(data)';
+  const msg=`Olá! Quero fazer um evento na Carbone.\nNome: ${f.get('nome')||'(nome)'}\nData: ${data}\nPessoas: ${f.get('pessoas')||'(nº)'}\nOcasião: ${f.get('tipo')}${f.get('obs')?'\nObs.: '+f.get('obs'):''}`;
+  const p=document.getElementById('previa'); p.classList.add('on');
+  p.textContent=L('A equipe de eventos receberia esta mensagem no WhatsApp. No site publicado, o botão abre a conversa direto.\n\n','The events team would get this message on WhatsApp. On the live site, the button opens the chat directly.\n\n')+msg;
+  conta('Pedido de evento');
+});
+
+/* ---------- painel da casa ---------- */
+const cont={};
+function conta(k){cont[k]=(cont[k]||0)+1;pintaPainel();}
+function pintaPainel(){const l=Object.entries(cont).sort((a,b)=>b[1]-a[1]);document.getElementById('painel-lista').innerHTML=l.length?l.map(([k,v])=>`<li><span>${k}</span><b>${v}</b></li>`).join(''):'<li><span>Ainda nenhum toque</span></li>';}
+document.addEventListener('click',e=>{const a=e.target.closest('[data-evt]');if(a)conta(a.dataset.evt);});
+const bR=document.getElementById('b-revisao'),bP=document.getElementById('b-painel');
+bR.addEventListener('click',()=>{const on=document.body.classList.toggle('revisao');bR.setAttribute('aria-pressed',on);});
+bP.addEventListener('click',()=>{const on=document.getElementById('painel').classList.toggle('on');bP.setAttribute('aria-pressed',on);pintaPainel();});
+if(location.hash==='#revisao'){document.body.classList.add('revisao');bR.setAttribute('aria-pressed','true');}
+
+if(new URLSearchParams(location.search).get('lang')==='en'){setTimeout(()=>document.getElementById('lang').click(),0);}
+function tudo(){pintaAgora();pintaCortes();pintaCarta();pintaHoras();pintaPainel();}
+tudo();
+</script>
+</body>
+</html>
